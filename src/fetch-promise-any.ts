@@ -5,7 +5,8 @@ const url31 = "https://mdn.github.io/learning-area/javascript/oojs/json/superher
 const fetchPromise11 = fetch(url11);
 const fetchPromise21 = fetch(url21);
 const fetchPromise31 = fetch(url31);
-  
+// need a response from at least one async function
+//good for calling db for data
 Promise.any([fetchPromise11, fetchPromise21, fetchPromise31])
   .then((response: Response) => {
       console.log(`${response.url}: ${response.status}`);

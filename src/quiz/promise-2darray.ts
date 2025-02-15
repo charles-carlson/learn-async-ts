@@ -16,18 +16,30 @@ function sum2DArray(arr: number[][]): Promise<number> {
          * Replace the logic in the setTimeout() with the actual logic to sum the numbers
          * to understand the difference in execution with and without setTimeout()
          **/
-        setTimeout(() => {
-            let sum = 0;
-            for (let i = 0; i < arr.length; i++) {
-                for (let j = 0; j < arr[i].length; j++) {
-                    console.log(`Adding ${arr[i][j]} to sum`);
-                    sum += arr[i][j];
-                }
+        //happens to be async since setTimeout places function into an event queue, will run later
+        // setTimeout(()=>{
+        //     let sum  = 0
+        //     for(let i = 0;i<arr.length;i++){
+        //         for(let j = 0;j < arr.length;j++){
+        //             console.log(`Adding ${arr[i][j]} to sum`);
+        //             sum += arr[i][j];
+        //         }
+        //     }
+        //     resolve(sum)
+        // },0)
+        //happens synchronus, results are logged after end of script since the log in the then blocks 
+        //are scheduled asynchronsly
+        let sum = 0
+        for(let i = 0;i<arr.length;i++){
+            for(let j = 0;j < arr.length;j++){
+                console.log(`Adding ${arr[i][j]} to sum`);
+                sum += arr[i][j];
             }
-            resolve(sum);
-        }, 0);
-        console.log('returning from sum');
-    });
+        }
+        resolve(sum)
+        console.log("returning from sum")
+    })
+
 }
 
 // Example usage:
@@ -37,8 +49,10 @@ const array2D = [
     [7, 8, 9]
 ];
 
-const sumPromise1 = sum2DArray(array2D);
-console.log('sumPromise1:', sumPromise1);
+// once microservice called, runs promised result when it is completed
+const sumPromise1 = sum2DArray(array2D).then((res) => console.log(res)).catch((e) => console.error(e));
+//console.log('sumPromise1:', sumPromise1);
 
-const sumPromise2 = sum2DArray([]);
-console.log('sumPromise2:', sumPromise2);
+const sumPromise2 = sum2DArray([]).then((res) => console.log(res)).catch((e)=>console.log(e));
+//console.log('sumPromise2:', sumPromise2);
+console.log("end of script")

@@ -1,4 +1,9 @@
 - Extract the code in the setTimeout function and replace the setTimeout function  with the extracted code. Then run the main script. 
 - Is there a difference in the flow of execution from when the code was in the setTimeout function?
+Yes, since with setTimeout, it places that function into the timer queue, and at the end of the main script execution, it will then execute all the console logs and logic that
+were included in the setTimeout function. When removing the setTimeout function, the code has a synchronus pattern of how the console logs are printing within the function 
+alongside the main script prints. Only in the then statements are the promises that return the value are being printed at the end.
 - Is the flow of execution in both these examples different from the flow of execution with the examples using the fetch() API, which also returns a promise? 
 - If yes, explain the code execution difference. Add your explanation to this file.
+Yes, using the then statements is the same as returning a Promise, in the other files involving fetches with then statements, it 
+will print the resolved promises at the end when the Promises return a value.
